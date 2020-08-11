@@ -6,7 +6,6 @@ import plotly
 import random
 import plotly.graph_objs as go
 from collections import deque
-
 X = deque()
 Y = deque()
 BX = ['a','b', 'c']
@@ -40,22 +39,22 @@ def update_graph(n):
     X.append(X[-1] + 1)
     Y.append(Y[-1]*(1 + random.uniform(-0.1,0.1)))
 
-    fig = plotly.tools.make_subplots(rows=2, cols=1, vertical_spacing=0.2)
+    fig = plotly.tools.make_subplots(rows=1, cols=1, vertical_spacing=0.2)
     fig['layout']['margin'] = {
         'l':30, 'r':10, 'b':30, 't':10
     }
-    fig.append_trace({
-        'x':list(X)[-15:],
-        'y':list(Y)[-15:],
-        'name':'random',
-        'mode':'lines+markers',
-        'type':'scatter'
-    },1,1)
+    # fig.append_trace({
+    #     'x':list(X)[-15:],
+    #     'y':list(Y)[-15:],
+    #     'name':'random',
+    #     'mode':'lines+markers',
+    #     'type':'scatter'
+    # },1,1)
     fig.append_trace({
         'x':BX,
         'y':BY,
         'type':'bar'
-    },2,1)
+    },1,1)
     return fig
 
 @app.callback(Output('live-text', 'children'),
