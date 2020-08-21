@@ -4,9 +4,10 @@ import dash
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
-
-app = dash.Dash()
-start= datetime.datetime(2015,1,1)
+import flask
+flask_app = flask.Flask(__name__)
+app = dash.Dash(__name__, server = flask_app)
+start= datetime.datetime(2017,1,1)
 end = datetime.datetime.now()
 stock = 'TSLA'
 df = web.DataReader(stock,'yahoo', start, end)
@@ -34,6 +35,6 @@ def update_graph(input_data):
                 }
             })
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    flask_app.run(host = '0.0.0.0', debug=True)
 
 print(df.head())
